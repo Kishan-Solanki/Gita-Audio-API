@@ -1,0 +1,10 @@
+[
+  {"slug": "calm", "name_en": "Calm & Peace", "name_hi": "शांति और स्थिरता", "sort_order": 1},
+  {"slug": "devotion", "name_en": "Devotion & Love", "name_hi": "भक्ति और प्रेम", "sort_order": 2},
+  {"slug": "courage", "name_en": "Courage & Strength", "name_hi": "साहस और संबल", "sort_order": 3},
+  {"slug": "wisdom", "name_en": "Wisdom & Clarity", "name_hi": "विवेक और स्पष्टता", "sort_order": 4},
+  {"slug": "surrender", "name_en": "Surrender & Trust", "name_hi": "समर्पण और विश्वास", "sort_order": 5},
+  {"slug": "focus", "name_en": "Focus & Meditation", "name_hi": "ध्यान और एकाग्रता", "sort_order": 6},
+  {"slug": "gratitude", "name_en": "Gratitude & Joy", "name_hi": "कृतज्ञता और आनंद", "sort_order": 7},
+  {"slug": "steadfastness", "name_en": "Steadfastness (Dhriti)", "name_hi": "धृति और धैर्य", "sort_order": 8}
+]
