@@ -80,13 +80,34 @@ Add the following in the **Environment** tab:
 |---|---|---|
 | `PYTHON_VERSION` | `3.12.0` | Python runtime version |
 | `ENV` | `production` | Production mode |
-| `DATABASE_URL` | `<Internal Database URL>` | From the database created above |
+| `DATABASE_URL` | `<Internal Database URL>` | From the database created above (or Supabase/Neon URL) |
 | `JWT_SECRET` | *(Click 'Generate')* | 32+ character random secret |
 | `AUDIO_ROOT` | `data` | Directory containing verse audio files |
 | `AUDIO_BASE_URL` | `https://<your-app-name>.onrender.com/audio` | Public audio URL |
 | `CORS_ORIGINS` | `["*"]` | Allowed front-end origins |
 
 Click **Save Changes** and deploy.
+
+---
+
+## 💡 Important: Render Free Tier Limitations & Workarounds
+
+### 1. Memory Limit (512 MB)
+- Render Free Web Service has **512 MB RAM**.
+- We configured Gunicorn with **2 workers (`-w 2`)** instead of 4 to stay well within ~250–300 MB RAM.
+
+### 2. Cold Starts (Spin down after 15 min of inactivity)
+- Free web services go to sleep if there are no requests for 15 minutes.
+- The next request will take ~20–30 seconds to wake up.
+- **Tip**: You can use a free pinging service like [Cron-job.org](https://cron-job.org) or [UptimeRobot](https://uptimerobot.com) to ping `https://<your-app>.onrender.com/health` every 10–14 minutes to keep it awake!
+
+### 3. Render Free PostgreSQL 30-Day Expiry vs Permanent Free DB
+- Render's built-in **free PostgreSQL instance expires after 30 days**.
+- **Permanent 100% Free Alternative**: Use **[Supabase](https://supabase.com)** or **[Neon](https://neon.tech)** for PostgreSQL:
+  1. Create a free project on [Neon.tech](https://neon.tech) or [Supabase](https://supabase.com).
+  2. Copy the connection string (e.g. `postgresql://user:pass@ep-xyz.neon.tech/gita?sslmode=require`).
+  3. Set `DATABASE_URL` in Render Web Service environment variables to that connection string.
+  4. Both Neon and Supabase provide **permanent free PostgreSQL** with full `pg_trgm` support!
 
 ---
 

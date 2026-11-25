@@ -1,12 +1,13 @@
 services:
   # ---------------------------------------------------------------------------
-  # FastAPI Web Service
+  # FastAPI Web Service (Free Tier)
   # ---------------------------------------------------------------------------
   - type: web
     name: gita-audio-api
     runtime: python
+    plan: free
     buildCommand: "./deploy/render_build.sh"
-    startCommand: "gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
+    startCommand: "gunicorn app.main:app -w 2 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT"
     healthCheckPath: "/health/ready"
     envVars:
       - key: PYTHON_VERSION
@@ -35,11 +36,13 @@ services:
         value: '["*"]'
 
 # ---------------------------------------------------------------------------
-# Managed PostgreSQL Database
+# Managed PostgreSQL Database (Free Tier)
+# Note: Render Free PostgreSQL expires after 30 days.
+# You can also use Supabase / Neon (permanent free tier) by putting its URL in DATABASE_URL.
 # ---------------------------------------------------------------------------
 databases:
   - name: gita-db
     databaseName: gita
     user: gita_user
-    plan: starter # Change to free if testing on free tier
+    plan: free
     postgresMajorVersion: 16
