@@ -37,8 +37,7 @@ def valid_auth_token(mock_user: User) -> str:
     """JWT bearer token for mock_user."""
     return create_access_token(
         subject=str(mock_user.id),
-        email=mock_user.email,
-        is_admin=mock_user.is_admin,
+        extra={"email": mock_user.email, "is_admin": mock_user.is_admin},
     )
 
 

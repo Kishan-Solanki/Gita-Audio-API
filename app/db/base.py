@@ -32,7 +32,7 @@ metadata = MetaData(naming_convention=_convention)
 # ── Engine & session factory ─────────────────────────────────────────────
 
 engine: AsyncEngine = create_async_engine(
-    settings.DATABASE_URL,
+    settings.async_database_url,
     echo=(settings.ENV == "development"),
     pool_size=10,
     max_overflow=20,

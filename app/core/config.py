@@ -19,6 +19,16 @@ class Settings(BaseSettings):
     # ── Database ────────────────────────────────────────────────────────
     DATABASE_URL: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/gita"
 
+    @property
+    def async_database_url(self) -> str:
+        """Ensure database URL uses asyncpg driver even if Render provides postgresql:// or postgres://."""
+        url = self.DATABASE_URL
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+            url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return url
+
     # ── JWT ──────────────────────────────────────────────────────────────
     JWT_SECRET: str = "CHANGE-ME-IN-PRODUCTION"
     JWT_ALGORITHM: str = "HS256"
