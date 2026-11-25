@@ -37,7 +37,13 @@ async def seed_weeks(
 
         for w in weeks:
             week_num = int(w["week"])
-            rec_ch_num = int(w["recommended_chapter_number"]) if w.get("recommended_chapter_number") else None
+            raw_rec_ch = w.get("recommended_chapter_number", "")
+            rec_ch_num = None
+            if raw_rec_ch:
+                try:
+                    rec_ch_num = int(str(raw_rec_ch).strip())
+                except (ValueError, TypeError):
+                    rec_ch_num = None
             rec_ch_id = ch_map.get(rec_ch_num) if rec_ch_num else None
 
             # Calculate trimester: 1-12 -> 1, 13-27 -> 2, 28-40 -> 3
