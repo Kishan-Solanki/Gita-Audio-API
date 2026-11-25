@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime, UTC
 from typing import Any
 
-from sqlalchemy import MetaData, func
+from sqlalchemy import DateTime, MetaData, func
 from sqlalchemy.ext.asyncio import (
     AsyncAttrs,
     AsyncEngine,
@@ -61,11 +61,13 @@ class Base(AsyncAttrs, DeclarativeBase):
     __abstract__ = True
 
     created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
         default=lambda: datetime.now(UTC),
         server_default=func.now(),
         nullable=False,
     )
     updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
         default=lambda: datetime.now(UTC),
         server_default=func.now(),
         onupdate=lambda: datetime.now(UTC),
