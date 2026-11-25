@@ -4,6 +4,7 @@
 """
 
 from app.db.models.content import (
+    AudioKind,
     AudioTrack,
     Chapter,
     ChapterTopic,
@@ -31,6 +32,7 @@ __all__ = [
     "ChapterTopic",
     "ShlokTopic",
     "Reciter",
+    "AudioKind",
     "AudioTrack",
     # pregnancy
     "WeekTheme",
