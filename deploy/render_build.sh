@@ -5,8 +5,8 @@ set -e
 echo "==> Upgrading pip..."
 python -m pip install --upgrade pip
 
-echo "==> Installing package dependencies..."
-python -m pip install .
+echo "==> Installing requirements..."
+python -m pip install -r requirements.txt
 
 echo "==> Running database migrations..."
 alembic upgrade head
